@@ -74,6 +74,42 @@ exports['get name with spaces'] = function (test) {
 	test.equal(lexer.nextToken(), null);
 }
 
+exports['get name with digits'] = function (test) {
+	var lexer = lexers.lexer('foo42');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'foo42');
+	test.equal(token.type, TokenType.Name);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
+exports['get name with underscore'] = function (test) {
+	var lexer = lexers.lexer('foo_bar');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'foo_bar');
+	test.equal(token.type, TokenType.Name);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
+exports['get name starting with underscore'] = function (test) {
+	var lexer = lexers.lexer('_foo');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '_foo');
+	test.equal(token.type, TokenType.Name);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
 exports['get integer and name'] = function (test) {
 	var lexer = lexers.lexer('42 foo');
 	
