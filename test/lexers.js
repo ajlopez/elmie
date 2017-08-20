@@ -218,3 +218,63 @@ exports['unclosed multiline string'] = function (test) {
 	}
 }
 
+exports['get symbol'] = function (test) {
+	var lexer = lexers.lexer('+');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '+');
+	test.equal(token.type, TokenType.Symbol);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
+exports['get symbol with two characters'] = function (test) {
+	var lexer = lexers.lexer('::');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '::');
+	test.equal(token.type, TokenType.Symbol);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
+exports['get comma as delimiter'] = function (test) {
+	var lexer = lexers.lexer(',');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, ',');
+	test.equal(token.type, TokenType.Delimiter);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
+exports['get left square bracket as delimiter'] = function (test) {
+	var lexer = lexers.lexer('[');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '[');
+	test.equal(token.type, TokenType.Delimiter);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
+exports['get right square bracket as delimiter'] = function (test) {
+	var lexer = lexers.lexer(']');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, ']');
+	test.equal(token.type, TokenType.Delimiter);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
