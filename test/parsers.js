@@ -1,5 +1,6 @@
 
-var parsers = require('../lib/parsers.js');
+var parsers = require('../lib/parsers');
+var types = require('../lib/types');
 
 function expr(text) {
 	var parser = parsers.parser(text);
@@ -40,6 +41,22 @@ exports['parse two integers'] = function (test) {
 	
 	test.ok(expr);
 	test.equal(expr.compile(), '3');
+	
+	test.equal(parser.nextExpression(), null);
+}
+
+exports['parse apply add'] = function (test) {
+	var ctx = {
+		names: {
+			add: types.func(types.Int, types.func(types.Int, types.Int))
+		}
+	}
+	var parser = parsers.parser('add 1 2', ctx);
+	
+	var expr = parser.nextExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), 'add(1, 2)');
 	
 	test.equal(parser.nextExpression(), null);
 }
