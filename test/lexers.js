@@ -169,3 +169,27 @@ exports['unclosed string'] = function (test) {
 		test.equal(ex.toString(), "Error: Unclosed String");
 	}
 }
+
+exports['unclosed string with new line'] = function (test) {
+	var lexer = lexers.lexer('"foo\n"');
+	
+	try {
+		lexer.nextToken();
+		test.fail();
+	}
+	catch (ex) {
+		test.equal(ex.toString(), "Error: Unclosed String");
+	}
+}
+
+exports['unclosed string with carriage return'] = function (test) {
+	var lexer = lexers.lexer('"foo\n"');
+	
+	try {
+		lexer.nextToken();
+		test.fail();
+	}
+	catch (ex) {
+		test.equal(ex.toString(), "Error: Unclosed String");
+	}
+}
