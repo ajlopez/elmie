@@ -29,3 +29,14 @@ exports['native integers to Float'] = function (test) {
 	test.equal(value.type, types.Float);
 };
 
+exports['native string to String'] = function (test) {
+	var value = values.value("foo", true);
+	
+	test.ok(value);
+	test.equal(typeof value, 'object');
+	test.equal(value.value, "foo");
+	test.equal(value.type, types.String);
+};
+
+
+
