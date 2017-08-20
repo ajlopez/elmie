@@ -278,3 +278,21 @@ exports['get right square bracket as delimiter'] = function (test) {
 	test.equal(lexer.nextToken(), null);
 }
 
+exports['get parentheses as delimiters'] = function (test) {
+	var lexer = lexers.lexer('()');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '(');
+	test.equal(token.type, TokenType.Delimiter);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, ')');
+	test.equal(token.type, TokenType.Delimiter);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
