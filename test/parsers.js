@@ -28,3 +28,19 @@ exports['parse string'] = function (test) {
 	test.equal(expr('"foo"'), '"foo"');
 }
 
+exports['parse two integers'] = function (test) {
+	var parser = parsers.parser('42\n3');
+	
+	var expr = parser.nextExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '42');
+	
+	var expr = parser.nextExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '3');
+	
+	test.equal(parser.nextExpression(), null);
+}
+
