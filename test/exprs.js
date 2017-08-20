@@ -116,26 +116,36 @@ exports['define expression'] = function (test) {
 	
 	test.ok(ctx.names);
 	test.ok(ctx.names.foo);
-	test.strictEqual(ctx.names.foo.type, types.Int);
-	test.strictEqual(ctx.names.foo.value, 42);
+	test.strictEqual(ctx.names.foo, 42);
 	
 	test.equal(def.compile(), 'var foo = 42;');
 }
 
 exports['name expression'] = function (test) {
-	var ctx = {};
-	
-	exprs.define('foo', exprs.constant(42, types.Int)).evaluate(ctx);
-	
-	var name = exprs.name('foo');
+	var name = exprs.name('foo', types.Int);
 	
 	test.ok(name);
 	
-	var result = name.evaluate(ctx);
+	var result = name.evaluate({ names : { foo: 42 } });
 	
 	test.ok(result);
 	test.strictEqual(result, 42);
 	
 	test.equal(name.compile(), 'foo');
+}
+
+exports['apply expression'] = function (test) {
+	var ctx = { names: { add: function (a, b) { return a + b; } } };
+	
+	var apply = exprs.apply([ exprs.name('add', types.func(types.Int, types.func(types.Int, types.Int))), exprs.constant(41, types.Int), exprs.constant(1, types.Int) ]);
+	
+	test.ok(apply);
+	
+	var result = apply.evaluate(ctx);
+	
+	test.ok(result);
+	test.strictEqual(result, 42);
+	
+	test.equal(apply.compile(), 'add(41, 1)');
 }
 
