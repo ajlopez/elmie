@@ -335,6 +335,45 @@ exports['get names with indentation'] = function (test) {
 	test.strictEqual(token.value, 'bar');
 	test.equal(token.type, TokenType.Name);
 	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.equal(token.type, TokenType.EndOfExpression);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
+exports['get names with two indentations'] = function (test) {
+	var lexer = lexers.lexer('foo\n bar\n  baz');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'foo');
+	test.equal(token.type, TokenType.Name);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'bar');
+	test.equal(token.type, TokenType.Name);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'baz');
+	test.equal(token.type, TokenType.Name);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.equal(token.type, TokenType.EndOfExpression);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.equal(token.type, TokenType.EndOfExpression);
+	
 	test.equal(lexer.nextToken(), null);
 }
 
