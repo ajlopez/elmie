@@ -146,3 +146,14 @@ exports['get float and name'] = function (test) {
 	test.equal(lexer.nextToken(), null);
 }
 
+exports['get string'] = function (test) {
+	var lexer = lexers.lexer('"foo"');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'foo');
+	test.equal(token.type, TokenType.String);
+	
+	test.equal(lexer.nextToken(), null);
+}
