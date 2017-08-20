@@ -296,3 +296,27 @@ exports['get parentheses as delimiters'] = function (test) {
 	test.equal(lexer.nextToken(), null);
 }
 
+exports['get end of expression'] = function (test) {
+	var lexer = lexers.lexer('foo\nbar');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'foo');
+	test.equal(token.type, TokenType.Name);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '\n');
+	test.equal(token.type, TokenType.EndOfExpression);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'bar');
+	test.equal(token.type, TokenType.Name);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
