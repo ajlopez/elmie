@@ -157,3 +157,15 @@ exports['get string'] = function (test) {
 	
 	test.equal(lexer.nextToken(), null);
 }
+
+exports['unclosed string'] = function (test) {
+	var lexer = lexers.lexer('"foo');
+	
+	try {
+		lexer.nextToken();
+		test.fail();
+	}
+	catch (ex) {
+		test.equal(ex.toString(), "Error: Unclosed String");
+	}
+}
