@@ -70,3 +70,11 @@ exports['functional type not equal to simple ones'] = function (test) {
 	test.strictEqual(types.equal(func, types.String), false);
 }
 
+exports['list type'] = function (test) {
+	var list = types.list(types.String);
+	
+	test.ok(list);
+	test.equal(typeof list, 'object');
+	test.strictEqual(list.type(), types.String);
+}
+
