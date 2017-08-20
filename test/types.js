@@ -99,5 +99,12 @@ exports['list type is not equal to primitive ones'] = function (test) {
 	test.strictEqual(types.equal(list, types.String), false);
 }
 
+exports['numberic predicate'] = function (test) {
+	test.strictEqual(types.numeric(types.Int), true);
+	test.strictEqual(types.numeric(types.Float), true);
+	test.strictEqual(types.numeric(types.Number), true);
 
+	test.strictEqual(types.numeric(types.func(types.Int, types.Int)), false);
+	test.strictEqual(types.numeric(types.list(types.String)), false);
+}
 
