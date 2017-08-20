@@ -102,3 +102,23 @@ exports['invalid add expression with right string'] = function (test) {
 	}
 }
 
+exports['define expression'] = function (test) {
+	var def = exprs.define('foo', exprs.constant(42, types.Int));
+	
+	test.ok(def);
+	
+	var ctx = {};
+	
+	var result = def.evaluate(ctx);
+	
+	test.ok(result);
+	test.strictEqual(result, 42);
+	
+	test.ok(ctx.names);
+	test.ok(ctx.names.foo);
+	test.strictEqual(ctx.names.foo.type(), types.Int);
+	test.strictEqual(ctx.names.foo.evaluate(), 42);
+	
+	test.equal(def.compile(), 'var foo = 42;');
+}
+
