@@ -11,3 +11,12 @@ exports['native integers to Int'] = function (test) {
 	test.equal(value.type, types.Int);
 };
 
+exports['native real to Float'] = function (test) {
+	var value = values.value(3.14159);
+	
+	test.ok(value);
+	test.equal(typeof value, 'object');
+	test.equal(value.value, 3.14159);
+	test.equal(value.type, types.Float);
+};
+
