@@ -193,3 +193,28 @@ exports['unclosed string with carriage return'] = function (test) {
 		test.equal(ex.toString(), "Error: Unclosed String");
 	}
 }
+
+exports['get multiline string'] = function (test) {
+	var lexer = lexers.lexer('"""foo\nbar"""');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'foo\nbar');
+	test.equal(token.type, TokenType.String);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
+exports['unclosed multiline string'] = function (test) {
+	var lexer = lexers.lexer('"""foo\nbar"');
+	
+	try {
+		lexer.nextToken();
+		test.fail();
+	}
+	catch (ex) {
+		test.equal(ex.toString(), "Error: Unclosed String");
+	}
+}
+
