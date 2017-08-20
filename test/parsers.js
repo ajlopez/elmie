@@ -20,3 +20,7 @@ exports['parse integer'] = function (test) {
 	test.equal(expr('42'), '42');
 }
 
+exports['parse string'] = function (test) {
+	test.equal(expr('"foo"'), '"foo"');
+}
+
