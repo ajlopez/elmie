@@ -9,6 +9,7 @@ exports['integer constant expression'] = function (test) {
 	test.equal(typeof cons, 'object');
 	test.strictEqual(cons.evaluate(), 42);
 	test.strictEqual(cons.type(), types.Int);
+	test.strictEqual(cons.compile(), '42');
 }
 
 exports['float constant expression'] = function (test) {
@@ -18,6 +19,7 @@ exports['float constant expression'] = function (test) {
 	test.equal(typeof cons, 'object');
 	test.strictEqual(cons.evaluate(), 3.14159);
 	test.strictEqual(cons.type(), types.Float);
+	test.strictEqual(cons.compile(), '3.14159');
 }
 
 exports['string constant expression'] = function (test) {
@@ -27,5 +29,6 @@ exports['string constant expression'] = function (test) {
 	test.equal(typeof cons, 'object');
 	test.strictEqual(cons.evaluate(), 'foo');
 	test.strictEqual(cons.type(), types.String);
+	test.strictEqual(cons.compile(), '"foo"');
 }
 
