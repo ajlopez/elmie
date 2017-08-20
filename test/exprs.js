@@ -32,3 +32,73 @@ exports['string constant expression'] = function (test) {
 	test.strictEqual(cons.compile(), '"foo"');
 }
 
+exports['add integer integer expression'] = function (test) {
+	var add = exprs.add(exprs.constant(41, types.Int), exprs.constant(1, types.Int));
+	
+	test.ok(add);
+	test.equal(typeof add, 'object');
+	test.strictEqual(add.evaluate(), 42);
+	test.strictEqual(add.type(), types.Int);
+	test.strictEqual(add.compile(), '41 + 1');
+}
+
+exports['add integer float expression'] = function (test) {
+	var add = exprs.add(exprs.constant(41, types.Int), exprs.constant(1.5, types.Float));
+	
+	test.ok(add);
+	test.equal(typeof add, 'object');
+	test.strictEqual(add.evaluate(), 42.5);
+	test.strictEqual(add.type(), types.Float);
+	test.strictEqual(add.compile(), '41 + 1.5');
+}
+
+exports['add float integer expression'] = function (test) {
+	var add = exprs.add(exprs.constant(41.5, types.Float), exprs.constant(1, types.Int));
+	
+	test.ok(add);
+	test.equal(typeof add, 'object');
+	test.strictEqual(add.evaluate(), 42.5);
+	test.strictEqual(add.type(), types.Float);
+	test.strictEqual(add.compile(), '41.5 + 1');
+}
+
+exports['add expression with left number'] = function (test) {
+	var add = exprs.add(exprs.constant(40.5, types.Number), exprs.constant(1.5, types.Float));
+	
+	test.ok(add);
+	test.equal(typeof add, 'object');
+	test.strictEqual(add.evaluate(), 42);
+	test.strictEqual(add.type(), types.Number);
+	test.strictEqual(add.compile(), '40.5 + 1.5');
+}
+
+exports['add expression with right number'] = function (test) {
+	var add = exprs.add(exprs.constant(40.5, types.Float), exprs.constant(1.5, types.Number));
+	
+	test.ok(add);
+	test.equal(typeof add, 'object');
+	test.strictEqual(add.evaluate(), 42);
+	test.strictEqual(add.type(), types.Number);
+	test.strictEqual(add.compile(), '40.5 + 1.5');
+}
+
+exports['invalid add expression with left string'] = function (test) {
+	try {
+		exprs.add(exprs.constant("foo", types.String), exprs.constant(1.5, types.Number));
+		test.fail();
+	}
+	catch (ex) {
+		
+	}
+}
+
+exports['invalid add expression with right string'] = function (test) {
+	try {
+		exprs.add(exprs.constant(42, types.Int), exprs.constant("foo", types.String));
+		test.fail();
+	}
+	catch (ex) {
+		
+	}
+}
+

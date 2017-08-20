@@ -19,6 +19,7 @@ TBD
 - [Run Elm in Terminal](https://jaketrent.com/post/run-elm-in-terminal/)
 - [Beginning Elm](http://elmprogramming.com/)
 - [Elm Indentation](http://elmprogramming.com/indentation.html)
+- [Elm - Check the Type of a value](https://stackoverflow.com/questions/36535368/elm-check-the-type-of-a-value)
 
 ## Samples
 
