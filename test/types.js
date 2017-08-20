@@ -61,3 +61,12 @@ exports['functional types equal'] = function (test) {
 	test.strictEqual(types.equal(func6, func4), false);
 }
 
+exports['functional type not equal to simple ones'] = function (test) {
+	var func = types.func(types.Int, types.Int);
+	
+	test.strictEqual(types.equal(func, types.Int), false);
+	test.strictEqual(types.equal(func, types.Float), false);
+	test.strictEqual(types.equal(func, types.Number), false);
+	test.strictEqual(types.equal(func, types.String), false);
+}
+
