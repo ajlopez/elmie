@@ -16,7 +16,9 @@ TBD
 
 ## References
 
-TBD
+- [Run Elm in Terminal](https://jaketrent.com/post/run-elm-in-terminal/)
+- [Beginning Elm](http://elmprogramming.com/)
+- [Elm Indentation](http://elmprogramming.com/indentation.html)
 
 ## Samples
 

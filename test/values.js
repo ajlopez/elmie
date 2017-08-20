@@ -38,5 +38,3 @@ exports['native string to String'] = function (test) {
 	test.equal(value.type, types.String);
 };
 
-
-
