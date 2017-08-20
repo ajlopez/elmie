@@ -122,3 +122,20 @@ exports['define expression'] = function (test) {
 	test.equal(def.compile(), 'var foo = 42;');
 }
 
+exports['name expression'] = function (test) {
+	var ctx = {};
+	
+	exprs.define('foo', exprs.constant(42, types.Int)).evaluate(ctx);
+	
+	var name = exprs.name('foo');
+	
+	test.ok(name);
+	
+	var result = name.evaluate(ctx);
+	
+	test.ok(result);
+	test.strictEqual(result, 42);
+	
+	test.equal(name.compile(), 'foo');
+}
+
