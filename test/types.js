@@ -30,7 +30,7 @@ exports['functional type'] = function (test) {
 	test.strictEqual(func.output(), types.Int);
 }
 
-exports['simple types equal'] = function (test) {
+exports['primitive types equal'] = function (test) {
 	test.strictEqual(types.equal(types.Int, types.Int), true);
 	test.strictEqual(types.equal(types.Float, types.Float), true);
 	test.strictEqual(types.equal(types.String, types.String), true);
@@ -61,7 +61,7 @@ exports['functional types equal'] = function (test) {
 	test.strictEqual(types.equal(func6, func4), false);
 }
 
-exports['functional type not equal to simple ones'] = function (test) {
+exports['functional type not equal to primitive ones'] = function (test) {
 	var func = types.func(types.Int, types.Int);
 	
 	test.strictEqual(types.equal(func, types.Int), false);
@@ -77,4 +77,27 @@ exports['list type'] = function (test) {
 	test.equal(typeof list, 'object');
 	test.strictEqual(list.type(), types.String);
 }
+
+exports['list type equal'] = function (test) {
+	var list1 = types.list(types.String);
+	var list2 = types.list(types.String);
+	var list3 = types.list(types.Int);
+	
+	test.strictEqual(types.equal(list1, list1), true);
+	test.strictEqual(types.equal(list1, list2), true);
+	test.strictEqual(types.equal(list2, list1), true);
+	test.strictEqual(types.equal(list1, list3), false);
+	test.strictEqual(types.equal(list2, list3), false);
+}
+
+exports['list type is not equal to primitive ones'] = function (test) {
+	var list = types.list(types.String);
+	
+	test.strictEqual(types.equal(list, types.Int), false);
+	test.strictEqual(types.equal(list, types.Float), false);
+	test.strictEqual(types.equal(list, types.Number), false);
+	test.strictEqual(types.equal(list, types.String), false);
+}
+
+
 
