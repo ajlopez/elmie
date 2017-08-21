@@ -122,3 +122,7 @@ exports['primitive types to string'] = function (test) {
 	test.strictEqual(types.String.toString(), 'String');
 }
 
+exports['functional types to string'] = function (test) {
+	test.strictEqual(types.func(types.Int, types.String).toString(), 'Int -> String');
+	test.strictEqual(types.func(types.Int, types.func(types.String, types.Float)).toString(), 'Int -> String -> Float');
+}
