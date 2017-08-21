@@ -182,3 +182,18 @@ exports['dot expression'] = function (test) {
 	test.equal(dot.compile(), 'foo.bar');
 }
 
+exports['function expression'] = function (test) {
+	var func = exprs.func(['a', 'b'], exprs.add(exprs.name('a', types.Int), exprs.name('b', types.Int)));
+	
+	test.ok(func);
+	
+	var result = func.evaluate();
+	
+	test.ok(result);
+	test.equal(typeof result, 'function');
+	test.equal(result.length, 2);
+	test.equal(result.apply(null, [1, 2]), 3);
+	
+	test.equal(func.compile(), '(function (a, b) { return a + b; })');
+}
+

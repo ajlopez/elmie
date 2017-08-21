@@ -214,3 +214,12 @@ exports['check type annotation'] = function (test) {
 	test.fail();
 }
 
+exports['parse anonymous function with one argument'] = function (test) {
+	var parser = parsers.parser('\\n -> add n 1');
+	
+	var result = parser.parseExpression();
+	
+	test.ok(result);
+	test.equal(result.compile(), '(function (n) { return add(n, 1); })');
+}
+

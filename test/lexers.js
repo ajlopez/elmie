@@ -356,6 +356,24 @@ exports['get parentheses as delimiters'] = function (test) {
 	test.equal(lexer.nextToken(), null);
 }
 
+exports['get lambda and name'] = function (test) {
+	var lexer = lexers.lexer('\\n');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '\\');
+	test.equal(token.type, TokenType.Symbol);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'n');
+	test.equal(token.type, TokenType.Name);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
 exports['get names without indentation'] = function (test) {
 	var lexer = lexers.lexer('foo\nbar');
 	
