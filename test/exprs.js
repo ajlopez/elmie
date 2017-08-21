@@ -38,7 +38,7 @@ exports['add integer integer expression'] = function (test) {
 	test.ok(add);
 	test.equal(typeof add, 'object');
 	test.strictEqual(add.evaluate(), 42);
-	test.strictEqual(add.type(), types.Int);
+	test.strictEqual(add.type(), types.Number);
 	test.strictEqual(add.compile(), '41 + 1');
 }
 
@@ -48,7 +48,7 @@ exports['add integer float expression'] = function (test) {
 	test.ok(add);
 	test.equal(typeof add, 'object');
 	test.strictEqual(add.evaluate(), 42.5);
-	test.strictEqual(add.type(), types.Float);
+	test.strictEqual(add.type(), types.Number);
 	test.strictEqual(add.compile(), '41 + 1.5');
 }
 
@@ -58,7 +58,7 @@ exports['add float integer expression'] = function (test) {
 	test.ok(add);
 	test.equal(typeof add, 'object');
 	test.strictEqual(add.evaluate(), 42.5);
-	test.strictEqual(add.type(), types.Float);
+	test.strictEqual(add.type(), types.Number);
 	test.strictEqual(add.compile(), '41.5 + 1');
 }
 
