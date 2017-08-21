@@ -29,6 +29,19 @@ exports['compile define expression'] = function (test) {
 	test.equal(result, 'var answer = 42;\n');
 }
 
+exports['compile type annotation'] = function (test) {
+	var result = elmie.compile('answer : Int');
+	
+	test.strictEqual(result, '');
+}
+
+exports['compile type annotation and define expression'] = function (test) {
+	var result = elmie.compile('answer : Int\nanswer = 42');
+	
+	test.ok(result);
+	test.equal(result, 'var answer = 42;\n');
+}
+
 exports['compile native expression'] = function (test) {
 	var result = elmie.compile('log = Native.console.log');
 	
