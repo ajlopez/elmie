@@ -1,6 +1,7 @@
 
 var parsers = require('../lib/parsers');
 var types = require('../lib/types');
+var contexts = require('../lib/contexts');
 
 function expr(text) {
 	var parser = parsers.parser(text);
@@ -50,11 +51,8 @@ exports['parse two integers'] = function (test) {
 }
 
 exports['parse apply add'] = function (test) {
-	var ctx = {
-		names: {
-			add: types.func(types.Int, types.func(types.Int, types.Int))
-		}
-	}
+	var ctx = contexts.context();
+	ctx.value('add', types.func(types.Int, types.func(types.Int, types.Int)));
 	var parser = parsers.parser('add 1 2', ctx);
 	
 	var expr = parser.parseExpression();
@@ -66,11 +64,8 @@ exports['parse apply add'] = function (test) {
 }
 
 exports['invalid value applying add'] = function (test) {
-	var ctx = {
-		names: {
-			add: types.func(types.Int, types.func(types.Int, types.Int))
-		}
-	}
+	var ctx = contexts.context();
+	ctx.value('add', types.func(types.Int, types.func(types.Int, types.Int)));
 	var parser = parsers.parser('add 1 "foo"', ctx);
 	
 	try {
@@ -85,11 +80,8 @@ exports['invalid value applying add'] = function (test) {
 }
 
 exports['parse apply add using indent'] = function (test) {
-	var ctx = {
-		names: {
-			add: types.func(types.Int, types.func(types.Int, types.Int))
-		}
-	}
+	var ctx = contexts.context();
+	ctx.value('add', types.func(types.Int, types.func(types.Int, types.Int)));
 	var parser = parsers.parser('add 1\n 2', ctx);
 	
 	var expr = parser.parseExpression();
@@ -145,47 +137,43 @@ exports['parse define expression'] = function (test) {
 }
 
 exports['parse simple type using Int'] = function (test) {
-	var ctx = {};
+	var ctx = contexts.context();
 	var parser = parsers.parser('type Id = Int', ctx);
 	
 	test.strictEqual(parser.parseExpression(), false);
 	
-	test.ok(ctx.types);
-	test.ok(ctx.types.Id);
-	test.strictEqual(ctx.types.Id, types.Int);
+	test.ok(ctx.type('Id'));
+	test.strictEqual(ctx.type('Id'), types.Int);
 }
 
 exports['parse simple type using functional type'] = function (test) {
-	var ctx = {};
+	var ctx = contexts.context();
 	var parser = parsers.parser('type Decoder = Int -> String', ctx);
 	
 	test.strictEqual(parser.parseExpression(), false);
 	
-	test.ok(ctx.types);
-	test.ok(ctx.types.Decoder);
-	test.ok(types.equal(ctx.types.Decoder, types.func(types.Int, types.String)));
+	test.ok(ctx.type('Decoder'));
+	test.ok(types.equal(ctx.type('Decoder'), types.func(types.Int, types.String)));
 }
 
 exports['parse type annotation'] = function (test) {
-	var ctx = {};
+	var ctx = contexts.context();
 	var parser = parsers.parser('answer : Int', ctx);
 	
 	test.strictEqual(parser.parseExpression(), false);
 	
-	test.ok(ctx.names);
-	test.ok(ctx.names.answer);
-	test.ok(types.equal(ctx.names.answer, types.Int));
+	test.ok(ctx.value('answer'));
+	test.ok(types.equal(ctx.value('answer'), types.Int));
 }
 
 exports['parse type annotation and define'] = function (test) {
-	var ctx = {};
+	var ctx = contexts.context();
 	var parser = parsers.parser('answer : Int\nanswer = 42', ctx);
 	
 	test.strictEqual(parser.parseExpression(), false);
 	
-	test.ok(ctx.names);
-	test.ok(ctx.names.answer);
-	test.ok(types.equal(ctx.names.answer, types.Int));
+	test.ok(ctx.value('answer'));
+	test.ok(types.equal(ctx.value('answer'), types.Int));
 	
 	var result = parser.parseExpression();
 	
@@ -194,14 +182,13 @@ exports['parse type annotation and define'] = function (test) {
 }
 
 exports['check type annotation'] = function (test) {
-	var ctx = {};
+	var ctx = contexts.context();
 	var parser = parsers.parser('answer : Int\nanswer = "foo"', ctx);
 	
 	test.strictEqual(parser.parseExpression(), false);
 	
-	test.ok(ctx.names);
-	test.ok(ctx.names.answer);
-	test.ok(types.equal(ctx.names.answer, types.Int));
+	test.ok(ctx.value('answer'));
+	test.ok(types.equal(ctx.value('answer'), types.Int));
 	
 	try {
 		parser.parseExpression();
