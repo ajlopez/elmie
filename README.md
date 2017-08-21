@@ -26,6 +26,9 @@ TBD
 - [What exactly does the := operator do in Elm?](https://stackoverflow.com/questions/36382675/what-exactly-does-the-operator-do-in-elm)
 - [Document comparable/appendable/number typing rules](https://github.com/elm-lang/elm-lang.org/issues/199)
 - [JSON Survival Kit](https://www.brianthicks.com/json-survival-kit/)
+- [Asynchronous Functional Reactive Programming for GUIs](http://people.seas.harvard.edu/~chong/pubs/pldi13-elm.pdf)
+- [My Thesis is Finally Complete! "Elm: Concurrent FRP for functional GUIs"](https://www.reddit.com/r/haskell/comments/rkyoa/my_thesis_is_finally_complete_elm_concurrent_frp/)
+- [Elm Town](https://elmtown.github.io/)
 
 ## Samples
 
