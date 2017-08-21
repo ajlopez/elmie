@@ -5,7 +5,7 @@ var types = require('../lib/types');
 function expr(text) {
 	var parser = parsers.parser(text);
 	
-	var expr = parser.nextExpression();
+	var expr = parser.parseExpression();
 	
 	if (expr)
 		return expr.compile();
@@ -36,17 +36,17 @@ exports['parse string'] = function (test) {
 exports['parse two integers'] = function (test) {
 	var parser = parsers.parser('42\n3');
 	
-	var expr = parser.nextExpression();
+	var expr = parser.parseExpression();
 	
 	test.ok(expr);
 	test.equal(expr.compile(), '42');
 	
-	var expr = parser.nextExpression();
+	var expr = parser.parseExpression();
 	
 	test.ok(expr);
 	test.equal(expr.compile(), '3');
 	
-	test.equal(parser.nextExpression(), null);
+	test.equal(parser.parseExpression(), null);
 }
 
 exports['parse apply add'] = function (test) {
@@ -57,12 +57,12 @@ exports['parse apply add'] = function (test) {
 	}
 	var parser = parsers.parser('add 1 2', ctx);
 	
-	var expr = parser.nextExpression();
+	var expr = parser.parseExpression();
 	
 	test.ok(expr);
 	test.equal(expr.compile(), 'add(1, 2)');
 	
-	test.equal(parser.nextExpression(), null);
+	test.equal(parser.parseExpression(), null);
 }
 
 exports['parse apply add using indent'] = function (test) {
@@ -73,11 +73,11 @@ exports['parse apply add using indent'] = function (test) {
 	}
 	var parser = parsers.parser('add 1\n 2', ctx);
 	
-	var expr = parser.nextExpression();
+	var expr = parser.parseExpression();
 	
 	test.ok(expr);
 	test.equal(expr.compile(), 'add(1, 2)');
 	
-	test.equal(parser.nextExpression(), null);
+	test.equal(parser.parseExpression(), null);
 }
 
