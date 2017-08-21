@@ -50,3 +50,17 @@ exports['compile text ignoring new lines'] = function (test) {
 	test.equal(result, 'var log = console.log;\n');
 }
 
+exports['compile add integers'] = function (test) {
+	var result = elmie.compile('1 + 41');
+	
+	test.ok(result);
+	test.equal(result, '1 + 41;\n');
+}
+
+exports['compile add three integers'] = function (test) {
+	var result = elmie.compile('1 + 1 + 42');
+	
+	test.ok(result);
+	test.equal(result, '(1 + 1) + 42;\n');
+}
+
