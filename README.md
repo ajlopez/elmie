@@ -25,6 +25,7 @@ TBD
 - [Elm Cheat Sheet](https://github.com/izdi/elm-cheat-sheet)
 - [What exactly does the := operator do in Elm?](https://stackoverflow.com/questions/36382675/what-exactly-does-the-operator-do-in-elm)
 - [Document comparable/appendable/number typing rules](https://github.com/elm-lang/elm-lang.org/issues/199)
+- [JSON Survival Kit](https://www.brianthicks.com/json-survival-kit/)
 
 ## Samples
 
