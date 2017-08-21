@@ -102,6 +102,26 @@ exports['invalid add expression with right string'] = function (test) {
 	}
 }
 
+exports['subtract integer integer expression'] = function (test) {
+	var subtract = exprs.subtract(exprs.constant(43, types.Int), exprs.constant(1, types.Int));
+	
+	test.ok(subtract);
+	test.equal(typeof subtract, 'object');
+	test.strictEqual(subtract.evaluate(), 42);
+	test.strictEqual(subtract.type(), types.Number);
+	test.strictEqual(subtract.compile(), '43 - 1');
+}
+
+exports['subtract integer integer expression using name'] = function (test) {
+	var subtract = exprs.subtract(exprs.constant(43, types.Int), exprs.name('one', types.Int));
+	
+	test.ok(subtract);
+	test.equal(typeof subtract, 'object');
+	test.strictEqual(subtract.evaluate({ names: { one: 1 } }), 42);
+	test.strictEqual(subtract.type(), types.Number);
+	test.strictEqual(subtract.compile(), '43 - one');
+}
+
 exports['define expression'] = function (test) {
 	var def = exprs.define('foo', exprs.constant(42, types.Int));
 	
