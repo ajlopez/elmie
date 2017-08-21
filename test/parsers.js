@@ -174,3 +174,22 @@ exports['parse type annotation and define'] = function (test) {
 	test.equal(result.compile(), 'var answer = 42');
 }
 
+exports['check type annotation'] = function (test) {
+	var ctx = {};
+	var parser = parsers.parser('answer : Int\nanswer = "foo"', ctx);
+	
+	test.strictEqual(parser.parseExpression(), false);
+	
+	test.ok(ctx.names);
+	test.ok(ctx.names.answer);
+	test.ok(types.equal(ctx.names.answer, types.Int));
+	
+	try {
+		parser.parseExpression();
+		test.fail();
+	}
+	catch (ex) {
+		test.equal(ex.toString(), 'Error: Invalid value');
+	}
+}
+
