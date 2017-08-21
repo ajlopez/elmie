@@ -23,6 +23,7 @@ TBD
 - [Elm (programming language) from Wikipedia](https://en.wikipedia.org/wiki/Elm_(programming_language))
 - [Elm Syntax](http://elm-lang.org/docs/syntax)
 - [Elm Cheat Sheet](https://github.com/izdi/elm-cheat-sheet)
+- [What exactly does the := operator do in Elm?](https://stackoverflow.com/questions/36382675/what-exactly-does-the-operator-do-in-elm)
 
 ## Samples
 

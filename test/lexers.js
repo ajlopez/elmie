@@ -26,6 +26,36 @@ exports['get integer with spaces'] = function (test) {
 	test.equal(lexer.nextToken(), null);
 }
 
+exports['get integer skipping line comment'] = function (test) {
+	var lexer = lexers.lexer('42 -- line comment');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '42');
+	test.equal(token.type, TokenType.Integer);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
+exports['skip line comment and get integer'] = function (test) {
+	var lexer = lexers.lexer('-- line comment\n42');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '\n');
+	test.equal(token.type, TokenType.EndOfExpression);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '42');
+	test.equal(token.type, TokenType.Integer);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
 exports['get float'] = function (test) {
 	var lexer = lexers.lexer('3.14159');
 	
