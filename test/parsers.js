@@ -81,3 +81,14 @@ exports['parse apply add using indent'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse dot expression'] = function (test) {
+	var parser = parsers.parser('foo.bar');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), 'foo.bar');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
