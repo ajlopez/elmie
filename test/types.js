@@ -108,3 +108,10 @@ exports['numeric predicate'] = function (test) {
 	test.strictEqual(types.numeric(types.list(types.String)), false);
 }
 
+exports['from string'] = function (test) {
+	test.strictEqual(types.fromString('Int'), types.Int);
+	test.strictEqual(types.fromString('Float'), types.Float);
+	test.strictEqual(types.fromString('number'), types.Number);
+	test.strictEqual(types.fromString('String'), types.String);
+}
+
