@@ -147,3 +147,14 @@ exports['parse simple type using functional type'] = function (test) {
 	test.ok(types.equal(ctx.types.Decoder, types.func(types.Int, types.String)));
 }
 
+exports['parse type annotation'] = function (test) {
+	var ctx = {};
+	var parser = parsers.parser('answer : Int', ctx);
+	
+	test.strictEqual(parser.parseExpression(), false);
+	
+	test.ok(ctx.names);
+	test.ok(ctx.names.answer);
+	test.ok(types.equal(ctx.names.answer, types.Int));
+}
+
