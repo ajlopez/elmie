@@ -65,6 +65,25 @@ exports['parse apply add'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['invalid value applying add'] = function (test) {
+	var ctx = {
+		names: {
+			add: types.func(types.Int, types.func(types.Int, types.Int))
+		}
+	}
+	var parser = parsers.parser('add 1 "foo"', ctx);
+	
+	try {
+		parser.parseExpression();
+	}
+	catch (ex) {
+		test.equal(ex.toString(), 'Error: Invalid value');
+		return;
+	}
+
+	test.fail();
+}
+
 exports['parse apply add using indent'] = function (test) {
 	var ctx = {
 		names: {
@@ -186,10 +205,12 @@ exports['check type annotation'] = function (test) {
 	
 	try {
 		parser.parseExpression();
-		test.fail();
 	}
 	catch (ex) {
 		test.equal(ex.toString(), 'Error: Invalid value');
+		return;
 	}
+
+	test.fail();
 }
 
