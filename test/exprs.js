@@ -149,3 +149,16 @@ exports['apply expression'] = function (test) {
 	test.equal(apply.compile(), 'add(41, 1)');
 }
 
+exports['dot expression'] = function (test) {
+	var dot = exprs.dot(exprs.name('foo'), exprs.name('bar'));
+	
+	test.ok(dot);
+	
+	var result = dot.evaluate({ names: { foo: { bar: 42 } } });
+	
+	test.ok(result);
+	test.strictEqual(result, 42);
+	
+	test.equal(dot.compile(), 'foo.bar');
+}
+
