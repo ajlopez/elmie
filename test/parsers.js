@@ -92,3 +92,15 @@ exports['parse dot expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse add numbers'] = function (test) {
+	var parser = parsers.parser('41 + 1');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '41 + 1');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
+
