@@ -115,3 +115,10 @@ exports['from string'] = function (test) {
 	test.strictEqual(types.fromString('String'), types.String);
 }
 
+exports['primitive types to string'] = function (test) {
+	test.strictEqual(types.Int.toString(), 'Int');
+	test.strictEqual(types.Float.toString(), 'Float');
+	test.strictEqual(types.Number.toString(), 'number');
+	test.strictEqual(types.String.toString(), 'String');
+}
+
