@@ -36,3 +36,17 @@ exports['compile native expression'] = function (test) {
 	test.equal(result, 'var log = console.log;\n');
 }
 
+exports['compile native expression'] = function (test) {
+	var result = elmie.compile('log = Native.console.log');
+	
+	test.ok(result);
+	test.equal(result, 'var log = console.log;\n');
+}
+
+exports['compile text ignoring new lines'] = function (test) {
+	var result = elmie.compile('\nlog = Native.console.log\n\n');
+	
+	test.ok(result);
+	test.equal(result, 'var log = console.log;\n');
+}
+
