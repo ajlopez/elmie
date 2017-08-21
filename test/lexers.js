@@ -152,13 +152,19 @@ exports['get name with underscore'] = function (test) {
 	test.equal(lexer.nextToken(), null);
 }
 
-exports['get name starting with underscore'] = function (test) {
+exports['underscore before name is a symbol'] = function (test) {
 	var lexer = lexers.lexer('_foo');
 	
 	var token = lexer.nextToken();
 	
 	test.ok(token);
-	test.strictEqual(token.value, '_foo');
+	test.strictEqual(token.value, '_');
+	test.equal(token.type, TokenType.Symbol);
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, 'foo');
 	test.equal(token.type, TokenType.Name);
 	
 	test.equal(lexer.nextToken(), null);
