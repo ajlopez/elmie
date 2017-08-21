@@ -1,4 +1,4 @@
 
 log = Native.console.log
 
-log "Hello, world"
+log "1 + 1 =" (1 + 1)
