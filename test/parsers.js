@@ -103,4 +103,16 @@ exports['parse add numbers'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse define expression'] = function (test) {
+	var parser = parsers.parser('answer = 42');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), 'var answer = 42');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
+
 

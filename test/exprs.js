@@ -118,7 +118,7 @@ exports['define expression'] = function (test) {
 	test.ok(ctx.names.foo);
 	test.strictEqual(ctx.names.foo, 42);
 	
-	test.equal(def.compile(), 'var foo = 42;');
+	test.equal(def.compile(), 'var foo = 42');
 }
 
 exports['name expression'] = function (test) {
