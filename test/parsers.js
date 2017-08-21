@@ -61,3 +61,19 @@ exports['parse apply add'] = function (test) {
 	test.equal(parser.nextExpression(), null);
 }
 
+exports['parse apply add using indent'] = function (test) {
+	var ctx = {
+		names: {
+			add: types.func(types.Int, types.func(types.Int, types.Int))
+		}
+	}
+	var parser = parsers.parser('add 1\n 2', ctx);
+	
+	var expr = parser.nextExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), 'add(1, 2)');
+	
+	test.equal(parser.nextExpression(), null);
+}
+
