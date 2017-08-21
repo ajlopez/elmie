@@ -68,6 +68,18 @@ exports['skip comment and get integer'] = function (test) {
 	test.equal(lexer.nextToken(), null);
 }
 
+exports['skip nested comment and get integer'] = function (test) {
+	var lexer = lexers.lexer('{- a comment {- a nested\ncomment -}-}42');
+	
+	var token = lexer.nextToken();
+	
+	test.ok(token);
+	test.strictEqual(token.value, '42');
+	test.equal(token.type, TokenType.Integer);
+	
+	test.equal(lexer.nextToken(), null);
+}
+
 exports['get float'] = function (test) {
 	var lexer = lexers.lexer('3.14159');
 	
