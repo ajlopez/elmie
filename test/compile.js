@@ -64,3 +64,23 @@ exports['compile add three integers'] = function (test) {
 	test.equal(result, '(1 + 1) + 42;\n');
 }
 
+exports['compile dot with integer accessor'] = function (test) {
+	var result = elmie.compile('numbers.42');
+	
+	test.ok(result);
+	test.equal(result, 'numbers[42];\n');
+}
+
+exports['compile dot with string accessor'] = function (test) {
+	var result = elmie.compile('numbers."foo"');
+	
+	test.ok(result);
+	test.equal(result, 'numbers["foo"];\n');
+}
+
+exports['compile dot with expression accessor'] = function (test) {
+	var result = elmie.compile('numbers.(41 + 1)');
+	
+	test.ok(result);
+	test.equal(result, 'numbers[41 + 1];\n');
+}
