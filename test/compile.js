@@ -28,3 +28,11 @@ exports['compile define expression'] = function (test) {
 	test.ok(result);
 	test.equal(result, 'var answer = 42;\n');
 }
+
+exports['compile native expression'] = function (test) {
+	var result = elmie.compile('log = Native.console.log');
+	
+	test.ok(result);
+	test.equal(result, 'var log = console.log;\n');
+}
+
