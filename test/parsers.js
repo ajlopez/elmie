@@ -127,7 +127,7 @@ exports['parse define expression'] = function (test) {
 
 exports['parse simple type using Int'] = function (test) {
 	var ctx = {};
-	var parser = parsers.parser('type Id: Int', ctx);
+	var parser = parsers.parser('type Id = Int', ctx);
 	
 	test.strictEqual(parser.parseExpression(), false);
 	
@@ -136,4 +136,14 @@ exports['parse simple type using Int'] = function (test) {
 	test.strictEqual(ctx.types.Id, types.Int);
 }
 
+exports['parse simple type using functional type'] = function (test) {
+	var ctx = {};
+	var parser = parsers.parser('type Decoder = Int -> String', ctx);
+	
+	test.strictEqual(parser.parseExpression(), false);
+	
+	test.ok(ctx.types);
+	test.ok(ctx.types.Decoder);
+	test.ok(types.equal(ctx.types.Decoder, types.func(types.Int, types.String)));
+}
 
