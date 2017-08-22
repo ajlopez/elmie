@@ -153,7 +153,7 @@ exports['parse simple type using functional type'] = function (test) {
 	test.strictEqual(parser.parseExpression(), false);
 	
 	test.ok(ctx.type('Decoder'));
-	test.ok(types.equal(ctx.type('Decoder'), types.func(types.Int, types.String)));
+	test.ok(ctx.type('Decoder').equals(types.func(types.Int, types.String)));
 }
 
 exports['parse type annotation'] = function (test) {
@@ -163,7 +163,7 @@ exports['parse type annotation'] = function (test) {
 	test.strictEqual(parser.parseExpression(), false);
 	
 	test.ok(ctx.value('answer'));
-	test.ok(types.equal(ctx.value('answer'), types.Int));
+	test.ok(ctx.value('answer').equals(types.Int));
 }
 
 exports['parse type annotation and define'] = function (test) {
@@ -173,7 +173,7 @@ exports['parse type annotation and define'] = function (test) {
 	test.strictEqual(parser.parseExpression(), false);
 	
 	test.ok(ctx.value('answer'));
-	test.ok(types.equal(ctx.value('answer'), types.Int));
+	test.ok(ctx.value('answer').equals(types.Int));
 	
 	var result = parser.parseExpression();
 	
@@ -188,7 +188,7 @@ exports['check type annotation'] = function (test) {
 	test.strictEqual(parser.parseExpression(), false);
 	
 	test.ok(ctx.value('answer'));
-	test.ok(types.equal(ctx.value('answer'), types.Int));
+	test.ok(ctx.value('answer').equals(types.Int));
 	
 	try {
 		parser.parseExpression();

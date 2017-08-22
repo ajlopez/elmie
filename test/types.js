@@ -31,15 +31,15 @@ exports['functional type'] = function (test) {
 }
 
 exports['primitive types equal'] = function (test) {
-	test.strictEqual(types.equal(types.Int, types.Int), true);
-	test.strictEqual(types.equal(types.Float, types.Float), true);
-	test.strictEqual(types.equal(types.String, types.String), true);
-	test.strictEqual(types.equal(types.Int, types.Float), false);
-	test.strictEqual(types.equal(types.Float, types.Int), false);
-	test.strictEqual(types.equal(types.Int, types.Number), false);
-	test.strictEqual(types.equal(types.Float, types.Number), false);
-	test.strictEqual(types.equal(types.Int, types.String), false);
-	test.strictEqual(types.equal(types.Float, types.String), false);
+	test.strictEqual(types.Int.equals(types.Int), true);
+	test.strictEqual(types.Float.equals(types.Float), true);
+	test.strictEqual(types.String.equals(types.String), true);
+	test.strictEqual(types.Int.equals(types.Float), false);
+	test.strictEqual(types.Float.equals(types.Int), false);
+	test.strictEqual(types.Int.equals(types.Number), false);
+	test.strictEqual(types.Float.equals(types.Number), false);
+	test.strictEqual(types.Int.equals(types.String), false);
+	test.strictEqual(types.Float.equals(types.String), false);
 }
 
 exports['functional types equal'] = function (test) {
@@ -50,24 +50,24 @@ exports['functional types equal'] = function (test) {
 	var func5 = types.func(types.String, types.func(types.Int, types.Float));
 	var func6 = types.func(types.String, types.func(types.Int, types.String));
 	
-	test.strictEqual(types.equal(func1, func2), true);
-	test.strictEqual(types.equal(func2, func1), true);
-	test.strictEqual(types.equal(func1, func3), false);
-	test.strictEqual(types.equal(func3, func1), false);
+	test.strictEqual(func1.equals(func2), true);
+	test.strictEqual(func2.equals(func1), true);
+	test.strictEqual(func1.equals(func3), false);
+	test.strictEqual(func3.equals(func1), false);
 	
-	test.strictEqual(types.equal(func4, func5), true);
-	test.strictEqual(types.equal(func5, func4), true);
-	test.strictEqual(types.equal(func4, func6), false);
-	test.strictEqual(types.equal(func6, func4), false);
+	test.strictEqual(func4.equals(func5), true);
+	test.strictEqual(func5.equals(func4), true);
+	test.strictEqual(func4.equals(func6), false);
+	test.strictEqual(func6.equals(func4), false);
 }
 
 exports['functional type not equal to primitive ones'] = function (test) {
 	var func = types.func(types.Int, types.Int);
 	
-	test.strictEqual(types.equal(func, types.Int), false);
-	test.strictEqual(types.equal(func, types.Float), false);
-	test.strictEqual(types.equal(func, types.Number), false);
-	test.strictEqual(types.equal(func, types.String), false);
+	test.strictEqual(func.equals(types.Int), false);
+	test.strictEqual(func.equals(types.Float), false);
+	test.strictEqual(func.equals(types.Number), false);
+	test.strictEqual(func.equals(types.String), false);
 }
 
 exports['list type'] = function (test) {
@@ -83,20 +83,20 @@ exports['list type equal'] = function (test) {
 	var list2 = types.list(types.String);
 	var list3 = types.list(types.Int);
 	
-	test.strictEqual(types.equal(list1, list1), true);
-	test.strictEqual(types.equal(list1, list2), true);
-	test.strictEqual(types.equal(list2, list1), true);
-	test.strictEqual(types.equal(list1, list3), false);
-	test.strictEqual(types.equal(list2, list3), false);
+	test.strictEqual(list1.equals(list1), true);
+	test.strictEqual(list1.equals(list2), true);
+	test.strictEqual(list2.equals(list1), true);
+	test.strictEqual(list1.equals(list3), false);
+	test.strictEqual(list2.equals(list3), false);
 }
 
 exports['list type is not equal to primitive ones'] = function (test) {
 	var list = types.list(types.String);
 	
-	test.strictEqual(types.equal(list, types.Int), false);
-	test.strictEqual(types.equal(list, types.Float), false);
-	test.strictEqual(types.equal(list, types.Number), false);
-	test.strictEqual(types.equal(list, types.String), false);
+	test.strictEqual(list.equals(types.Int), false);
+	test.strictEqual(list.equals(types.Float), false);
+	test.strictEqual(list.equals(types.Number), false);
+	test.strictEqual(list.equals(types.String), false);
 }
 
 exports['numeric predicate'] = function (test) {
