@@ -126,3 +126,14 @@ exports['functional types to string'] = function (test) {
 	test.strictEqual(types.func(types.Int, types.String).toString(), 'Int -> String');
 	test.strictEqual(types.func(types.Int, types.func(types.String, types.Float)).toString(), 'Int -> String -> Float');
 }
+
+exports['match types to numeric'] = function (test) {
+	test.strictEqual(types.Int.match(types.Number), true);
+	test.strictEqual(types.Float.match(types.Number), true);
+	test.strictEqual(types.Number.match(types.Number), true);
+
+	test.strictEqual(types.String.match(types.Number), false);
+	test.strictEqual(types.list(types.Int).match(types.Number), false);
+	test.strictEqual(types.func(types.Int, types.Int).match(types.Number), false);
+}
+
