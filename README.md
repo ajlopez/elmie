@@ -29,6 +29,7 @@ TBD
 - [Asynchronous Functional Reactive Programming for GUIs](http://people.seas.harvard.edu/~chong/pubs/pldi13-elm.pdf)
 - [My Thesis is Finally Complete! "Elm: Concurrent FRP for functional GUIs"](https://www.reddit.com/r/haskell/comments/rkyoa/my_thesis_is_finally_complete_elm_concurrent_frp/)
 - [Elm Town](https://elmtown.github.io/)
+- [Create Elm App](https://github.com/halfzebra/create-elm-app)
 
 ## Samples
 

@@ -122,6 +122,26 @@ exports['subtract integer integer expression using name'] = function (test) {
 	test.strictEqual(subtract.compile(), '43 - one');
 }
 
+exports['multiply integer integer expression'] = function (test) {
+	var multiply = exprs.multiply(exprs.constant(21, types.Int), exprs.constant(2, types.Int));
+	
+	test.ok(multiply);
+	test.equal(typeof multiply, 'object');
+	test.strictEqual(multiply.evaluate(), 42);
+	test.strictEqual(multiply.type(), types.Number);
+	test.strictEqual(multiply.compile(), '21 * 2');
+}
+
+exports['multiply integer integer expression using name'] = function (test) {
+	var multiply = exprs.multiply(exprs.constant(21, types.Int), exprs.name('two', types.Int));
+	
+	test.ok(multiply);
+	test.equal(typeof multiply, 'object');
+	test.strictEqual(multiply.evaluate({ names: { two: 2 } }), 42);
+	test.strictEqual(multiply.type(), types.Number);
+	test.strictEqual(multiply.compile(), '21 * two');
+}
+
 exports['define expression'] = function (test) {
 	var def = exprs.define('foo', exprs.constant(42, types.Int));
 	
