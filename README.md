@@ -31,6 +31,7 @@ TBD
 - [Elm Town](https://elmtown.github.io/)
 - [Create Elm App](https://github.com/halfzebra/create-elm-app)
 - [ReactiveConf 2016 - Richard Feldman: Elm and React in production](https://www.youtube.com/watch?v=3FNKaGm3gk0)
+- [Toward a Better Front End Architecture: Elm - Codemash 2017](https://www.youtube.com/watch?v=EDp6UmaA9CM)
 
 ## Samples
 
