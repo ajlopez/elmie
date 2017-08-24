@@ -30,6 +30,7 @@ TBD
 - [My Thesis is Finally Complete! "Elm: Concurrent FRP for functional GUIs"](https://www.reddit.com/r/haskell/comments/rkyoa/my_thesis_is_finally_complete_elm_concurrent_frp/)
 - [Elm Town](https://elmtown.github.io/)
 - [Create Elm App](https://github.com/halfzebra/create-elm-app)
+- [ReactiveConf 2016 - Richard Feldman: Elm and React in production](https://www.youtube.com/watch?v=3FNKaGm3gk0)
 
 ## Samples
 
