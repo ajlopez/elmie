@@ -162,6 +162,26 @@ exports['integer divide integer integer expression using name'] = function (test
 	test.strictEqual(divide.compile(), '84 // two');
 }
 
+exports['divide integer integer expression'] = function (test) {
+	var divide = exprs.divide(exprs.constant(83, types.Int), exprs.constant(2, types.Int));
+	
+	test.ok(divide);
+	test.equal(typeof divide, 'object');
+	test.strictEqual(divide.evaluate(), 41.5);
+	test.strictEqual(divide.type(), types.Float);
+	test.strictEqual(divide.compile(), '83 / 2');
+}
+
+exports['divide integer integer expression using name'] = function (test) {
+	var divide = exprs.divide(exprs.constant(83, types.Int), exprs.name('two', types.Int));
+	
+	test.ok(divide);
+	test.equal(typeof divide, 'object');
+	test.strictEqual(divide.evaluate({ names: { two: 2 } }), 41.5);
+	test.strictEqual(divide.type(), types.Float);
+	test.strictEqual(divide.compile(), '83 / two');
+}
+
 exports['define expression'] = function (test) {
 	var def = exprs.define('foo', exprs.constant(42, types.Int));
 	
