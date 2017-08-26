@@ -125,3 +125,10 @@ exports['compile dot with expression accessor'] = function (test) {
 	test.ok(result);
 	test.equal(result, 'numbers[41 + 1];\n');
 }
+
+exports['compile function apply'] = function (test) {
+	var result = elmie.compile('incr 1');
+	
+	test.ok(result);
+	test.equal(result, 'incr(1);\n');
+}
