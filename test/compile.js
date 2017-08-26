@@ -70,11 +70,25 @@ exports['compile add integers'] = function (test) {
 	test.equal(result, '1 + 41;\n');
 }
 
+exports['compile multiply integers'] = function (test) {
+	var result = elmie.compile('2 * 21');
+	
+	test.ok(result);
+	test.equal(result, '2 * 21;\n');
+}
+
 exports['compile add three integers'] = function (test) {
 	var result = elmie.compile('1 + 1 + 42');
 	
 	test.ok(result);
 	test.equal(result, '(1 + 1) + 42;\n');
+}
+
+exports['compile arithmetic operation with three integers using precedence'] = function (test) {
+	var result = elmie.compile('1 + 2 * 3');
+	
+	test.ok(result);
+	test.equal(result, '1 + (2 * 3);\n');
 }
 
 exports['compile dot with integer accessor'] = function (test) {

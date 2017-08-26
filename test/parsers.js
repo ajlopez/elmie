@@ -114,6 +114,17 @@ exports['parse add numbers'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse add three numbers'] = function (test) {
+	var parser = parsers.parser('1 + 2 + 3');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '(1 + 2) + 3');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
 exports['parse subtract numbers'] = function (test) {
 	var parser = parsers.parser('43 - 1');
 	
