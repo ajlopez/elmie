@@ -84,6 +84,13 @@ exports['compile divide integers'] = function (test) {
 	test.equal(result, '84 / 2;\n');
 }
 
+exports['compile integer divide integers'] = function (test) {
+	var result = elmie.compile('84 // 2');
+	
+	test.ok(result);
+	test.equal(result, '84 // 2;\n');
+}
+
 exports['compile add three integers'] = function (test) {
 	var result = elmie.compile('1 + 1 + 42');
 	
