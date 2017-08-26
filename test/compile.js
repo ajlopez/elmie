@@ -132,3 +132,10 @@ exports['compile function apply'] = function (test) {
 	test.ok(result);
 	test.equal(result, 'incr(1);\n');
 }
+
+exports['compile function apply with type annotation'] = function (test) {
+	var result = elmie.compile('incr : Int -> Int\nincr 1');
+	
+	test.ok(result);
+	test.equal(result, 'incr(1);\n');
+}
