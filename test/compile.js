@@ -139,3 +139,10 @@ exports['compile function apply with type annotation'] = function (test) {
 	test.ok(result);
 	test.equal(result, 'incr(1);\n');
 }
+
+exports['compile function apply with type annotation with precedence over binary operator'] = function (test) {
+	var result = elmie.compile('incr : Int -> Int\nincr 1 * 3');
+	
+	test.ok(result);
+	test.equal(result, 'incr(1) * 3;\n');
+}
