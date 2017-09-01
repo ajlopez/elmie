@@ -33,6 +33,7 @@ TBD
 - [ReactiveConf 2016 - Richard Feldman: Elm and React in production](https://www.youtube.com/watch?v=3FNKaGm3gk0)
 - [Toward a Better Front End Architecture: Elm - Codemash 2017](https://www.youtube.com/watch?v=EDp6UmaA9CM)
 - [Functional Programming Course](https://github.com/data61/fp-course)
+- [A Farewell to FRP](http://elm-lang.org/blog/farewell-to-frp)
 
 ## Samples
 

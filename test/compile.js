@@ -105,6 +105,13 @@ exports['compile arithmetic operation with three integers using precedence'] = f
 	test.equal(result, '1 + (2 * 3);\n');
 }
 
+exports['compile arithmetic operation with three integers parenthesis'] = function (test) {
+	var result = elmie.compile('(1 + 2) * 3');
+	
+	test.ok(result);
+	test.equal(result, '(1 + 2) * 3;\n');
+}
+
 exports['compile dot with integer accessor'] = function (test) {
 	var result = elmie.compile('numbers.42');
 	
