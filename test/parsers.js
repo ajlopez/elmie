@@ -221,6 +221,17 @@ exports['parse anonymous function with one argument'] = function (test) {
 	test.equal(result.compile(), '(function (n) { return add(n, 1); })');
 }
 
+exports['parse anonymous function with one argument and binary add'] = function (test) {
+	var ctx = contexts.context();
+	ctx.value('n', types.Int);
+	var parser = parsers.parser('\\n -> n + 1', ctx);
+	
+	var result = parser.parseExpression();
+	
+	test.ok(result);
+	test.equal(result.compile(), '(function (n) { return n + 1; })');
+}
+
 exports['parse type annotation and define'] = function (test) {
 	var ctx = contexts.context();
 	var parser = parsers.parser('incr: Int -> Int\nincr n = add n 1', ctx);
@@ -235,5 +246,21 @@ exports['parse type annotation and define'] = function (test) {
 	test.ok(result);
 	test.equal(result.compile(), 'function incr(n) { return add(n, 1); }');
 }
+
+exports['parse type annotation and define using binary add'] = function (test) {
+	var ctx = contexts.context();
+	var parser = parsers.parser('incr: Int -> Int\nincr n = n + 1', ctx);
+	
+	test.strictEqual(parser.parseExpression(), false);
+	
+	test.ok(ctx.value('incr'));
+	test.ok(ctx.value('incr').equals(types.func(types.Int, types.Int)));
+	
+	var result = parser.parseExpression();
+	
+	test.ok(result);
+	test.equal(result.compile(), 'function incr(n) { return n + 1; }');
+}
+
 
 
