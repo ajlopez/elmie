@@ -6,6 +6,11 @@ exports['String is a type'] = function (test) {
 	test.equal(typeof types.String, 'object');
 }
 
+exports['Bool is a type'] = function (test) {
+	test.ok(types.Bool);
+	test.equal(typeof types.Bool, 'object');
+}
+
 exports['Int is a type'] = function (test) {
 	test.ok(types.Int);
 	test.equal(typeof types.Int, 'object');
@@ -34,6 +39,8 @@ exports['primitive types equal'] = function (test) {
 	test.strictEqual(types.Int.equals(types.Int), true);
 	test.strictEqual(types.Float.equals(types.Float), true);
 	test.strictEqual(types.String.equals(types.String), true);
+	test.strictEqual(types.Bool.equals(types.Bool), true);
+
 	test.strictEqual(types.Int.equals(types.Float), false);
 	test.strictEqual(types.Float.equals(types.Int), false);
 	test.strictEqual(types.Int.equals(types.Number), false);
@@ -82,12 +89,14 @@ exports['list type equal'] = function (test) {
 	var list1 = types.list(types.String);
 	var list2 = types.list(types.String);
 	var list3 = types.list(types.Int);
+	var list4 = types.list(types.Bool);
 	
 	test.strictEqual(list1.equals(list1), true);
 	test.strictEqual(list1.equals(list2), true);
 	test.strictEqual(list2.equals(list1), true);
 	test.strictEqual(list1.equals(list3), false);
 	test.strictEqual(list2.equals(list3), false);
+	test.strictEqual(list2.equals(list4), false);
 }
 
 exports['list type is not equal to primitive ones'] = function (test) {
@@ -97,6 +106,7 @@ exports['list type is not equal to primitive ones'] = function (test) {
 	test.strictEqual(list.equals(types.Float), false);
 	test.strictEqual(list.equals(types.Number), false);
 	test.strictEqual(list.equals(types.String), false);
+	test.strictEqual(list.equals(types.Bool), false);
 }
 
 exports['numeric predicate'] = function (test) {
@@ -106,6 +116,7 @@ exports['numeric predicate'] = function (test) {
 
 	test.strictEqual(types.numeric(types.func(types.Int, types.Int)), false);
 	test.strictEqual(types.numeric(types.list(types.String)), false);
+	test.strictEqual(types.numeric(types.list(types.Bool)), false);
 }
 
 exports['from string'] = function (test) {
@@ -113,6 +124,7 @@ exports['from string'] = function (test) {
 	test.strictEqual(types.fromString('Float'), types.Float);
 	test.strictEqual(types.fromString('number'), types.Number);
 	test.strictEqual(types.fromString('String'), types.String);
+	test.strictEqual(types.fromString('Bool'), types.Bool);
 }
 
 exports['primitive types to string'] = function (test) {
@@ -120,6 +132,7 @@ exports['primitive types to string'] = function (test) {
 	test.strictEqual(types.Float.toString(), 'Float');
 	test.strictEqual(types.Number.toString(), 'number');
 	test.strictEqual(types.String.toString(), 'String');
+	test.strictEqual(types.Bool.toString(), 'Bool');
 }
 
 exports['functional types to string'] = function (test) {
@@ -132,6 +145,7 @@ exports['match types to numeric'] = function (test) {
 	test.strictEqual(types.Float.match(types.Number), true);
 	test.strictEqual(types.Number.match(types.Number), true);
 
+	test.strictEqual(types.Bool.match(types.Number), false);
 	test.strictEqual(types.String.match(types.Number), false);
 	test.strictEqual(types.list(types.Int).match(types.Number), false);
 	test.strictEqual(types.func(types.Int, types.Int).match(types.Number), false);
