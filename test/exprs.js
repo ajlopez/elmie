@@ -257,3 +257,23 @@ exports['function expression'] = function (test) {
 	test.equal(func.compile(), '(function (a, b) { return a + b; })');
 }
 
+exports['mod integer integer expression'] = function (test) {
+	var mod = exprs.mod(exprs.constant(83, types.Int), exprs.constant(5, types.Int));
+	
+	test.ok(mod);
+	test.equal(typeof mod, 'object');
+	test.strictEqual(mod.evaluate(), 3);
+	test.strictEqual(mod.type(), types.Integer);
+	test.strictEqual(mod.compile(), '83 % 5');
+}
+
+exports['mod integer integer expression using name'] = function (test) {
+	var mod = exprs.mod(exprs.constant(83, types.Int), exprs.name('five', types.Int));
+	
+	test.ok(mod);
+	test.equal(typeof mod, 'object');
+	test.strictEqual(mod.evaluate({ names: { five: 5 } }), 3);
+	test.strictEqual(mod.type(), types.Integer);
+	test.strictEqual(mod.compile(), '83 % five');
+}
+
