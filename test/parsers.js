@@ -136,6 +136,28 @@ exports['parse subtract numbers'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse multiply numbers'] = function (test) {
+	var parser = parsers.parser('21 * 2');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '21 * 2');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
+exports['parse divide numbers'] = function (test) {
+	var parser = parsers.parser('84 / 2');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '84 / 2');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
 exports['parse define expression'] = function (test) {
 	var parser = parsers.parser('answer = 42');
 	
