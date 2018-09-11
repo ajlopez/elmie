@@ -158,6 +158,17 @@ exports['parse divide numbers'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse mod numbers'] = function (test) {
+	var parser = parsers.parser('83 % 5');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '83 % 5');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
 exports['parse define expression'] = function (test) {
 	var parser = parsers.parser('answer = 42');
 	
