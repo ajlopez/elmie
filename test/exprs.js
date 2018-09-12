@@ -277,3 +277,22 @@ exports['mod integer integer expression using name'] = function (test) {
 	test.strictEqual(mod.compile(), '83 % five');
 }
 
+exports['exponentiation number number expression'] = function (test) {
+	var exp = exprs.exp(exprs.constant(3, types.Number), exprs.constant(2, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), 9);
+	test.strictEqual(exp.type(), types.Number);
+	test.strictEqual(exp.compile(), 'Math.pow(3, 2)');
+}
+
+exports['exponentiation number number expression using name'] = function (test) {
+    var exp = exprs.exp(exprs.constant(3, types.Number), exprs.name('two', types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate({ names: { two: 2 } }), 9);
+	test.strictEqual(exp.type(), types.Number);
+	test.strictEqual(exp.compile(), 'Math.pow(3, two)');
+}
