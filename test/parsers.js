@@ -169,6 +169,17 @@ exports['parse mod numbers'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse exponentiation with numbers'] = function (test) {
+	var parser = parsers.parser('3 ^ 2');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), 'Math.pow(3, 2)');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
 exports['parse define expression'] = function (test) {
 	var parser = parsers.parser('answer = 42');
 	
