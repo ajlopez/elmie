@@ -296,3 +296,23 @@ exports['exponentiation number number expression using name'] = function (test) 
 	test.strictEqual(exp.type(), types.Number);
 	test.strictEqual(exp.compile(), 'Math.pow(3, two)');
 }
+
+exports['equal with same number'] = function (test) {
+    var exp = exprs.equal(exprs.constant(3, types.Number), exprs.constant(3, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '3 === 3');
+}
+
+exports['equal with different numbers'] = function (test) {
+    var exp = exprs.equal(exprs.constant(2, types.Number), exprs.constant(3, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), false);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '2 === 3');
+}
