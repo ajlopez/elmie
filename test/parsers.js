@@ -180,6 +180,17 @@ exports['parse exponentiation with numbers'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse equal numbers'] = function (test) {
+	var parser = parsers.parser('3 == 2');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '3 === 2');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
 exports['parse define expression'] = function (test) {
 	var parser = parsers.parser('answer = 42');
 	
