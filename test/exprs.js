@@ -316,3 +316,23 @@ exports['equal with different numbers'] = function (test) {
 	test.strictEqual(exp.type(), types.Boolean);
 	test.strictEqual(exp.compile(), '2 === 3');
 }
+
+exports['equal with same string'] = function (test) {
+    var exp = exprs.equal(exprs.constant("foo", types.String), exprs.constant("foo", types.String));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '"foo" === "foo"');
+}
+
+exports['equal with different strings'] = function (test) {
+    var exp = exprs.equal(exprs.constant("foo", types.String), exprs.constant("bar", types.String));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), false);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '"foo" === "bar"');
+}
