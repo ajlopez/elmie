@@ -191,6 +191,17 @@ exports['parse equal numbers'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse equal strings'] = function (test) {
+	var parser = parsers.parser('"foo" == "bar"');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '"foo" === "bar"');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
 exports['parse define expression'] = function (test) {
 	var parser = parsers.parser('answer = 42');
 	
