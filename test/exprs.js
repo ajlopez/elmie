@@ -377,3 +377,23 @@ exports['not equal with different strings'] = function (test) {
 	test.strictEqual(exp.compile(), '"foo" !== "bar"');
 }
 
+exports['less with numbers'] = function (test) {
+    var exp = exprs.less(exprs.constant(2, types.Number), exprs.constant(3, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '2 < 3');
+}
+
+exports['less with equal numbers'] = function (test) {
+    var exp = exprs.less(exprs.constant(3, types.Number), exprs.constant(3, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), false);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '3 < 3');
+}
+
