@@ -397,3 +397,22 @@ exports['less with equal numbers'] = function (test) {
 	test.strictEqual(exp.compile(), '3 < 3');
 }
 
+exports['less with strings'] = function (test) {
+    var exp = exprs.less(exprs.constant("bar", types.String), exprs.constant("foo", types.String));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '"bar" < "foo"');
+}
+
+exports['less with equal strings'] = function (test) {
+    var exp = exprs.less(exprs.constant("foo", types.String), exprs.constant("foo", types.String));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), false);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '"foo" < "foo"');
+}
