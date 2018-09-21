@@ -416,3 +416,43 @@ exports['less with equal strings'] = function (test) {
 	test.strictEqual(exp.type(), types.Boolean);
 	test.strictEqual(exp.compile(), '"foo" < "foo"');
 }
+
+exports['greater with numbers'] = function (test) {
+    var exp = exprs.greater(exprs.constant(3, types.Number), exprs.constant(2, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '3 > 2');
+}
+
+exports['greater with equal numbers'] = function (test) {
+    var exp = exprs.greater(exprs.constant(3, types.Number), exprs.constant(3, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), false);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '3 > 3');
+}
+
+exports['greater with strings'] = function (test) {
+    var exp = exprs.greater(exprs.constant("foo", types.String), exprs.constant("bar", types.String));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '"foo" > "bar"');
+}
+
+exports['greater with equal strings'] = function (test) {
+    var exp = exprs.greater(exprs.constant("foo", types.String), exprs.constant("foo", types.String));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), false);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '"foo" > "foo"');
+}
