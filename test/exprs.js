@@ -148,7 +148,7 @@ exports['integer divide integer integer expression'] = function (test) {
 	test.ok(divide);
 	test.equal(typeof divide, 'object');
 	test.strictEqual(divide.evaluate(), 42);
-	test.strictEqual(divide.type(), types.Integer);
+	test.strictEqual(divide.type(), types.Int);
 	test.strictEqual(divide.compile(), '84 // 2');
 }
 
@@ -158,7 +158,7 @@ exports['integer divide integer integer expression using name'] = function (test
 	test.ok(divide);
 	test.equal(typeof divide, 'object');
 	test.strictEqual(divide.evaluate({ names: { two: 2 } }), 42);
-	test.strictEqual(divide.type(), types.Integer);
+	test.strictEqual(divide.type(), types.Int);
 	test.strictEqual(divide.compile(), '84 // two');
 }
 
@@ -263,7 +263,7 @@ exports['mod integer integer expression'] = function (test) {
 	test.ok(mod);
 	test.equal(typeof mod, 'object');
 	test.strictEqual(mod.evaluate(), 3);
-	test.strictEqual(mod.type(), types.Integer);
+	test.strictEqual(mod.type(), types.Int);
 	test.strictEqual(mod.compile(), '83 % 5');
 }
 
@@ -273,7 +273,7 @@ exports['mod integer integer expression using name'] = function (test) {
 	test.ok(mod);
 	test.equal(typeof mod, 'object');
 	test.strictEqual(mod.evaluate({ names: { five: 5 } }), 3);
-	test.strictEqual(mod.type(), types.Integer);
+	test.strictEqual(mod.type(), types.Int);
 	test.strictEqual(mod.compile(), '83 % five');
 }
 
@@ -379,6 +379,16 @@ exports['not equal with different strings'] = function (test) {
 
 exports['less with numbers'] = function (test) {
     var exp = exprs.less(exprs.constant(2, types.Number), exprs.constant(3, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '2 < 3');
+}
+
+exports['less with integer numbers'] = function (test) {
+    var exp = exprs.less(exprs.constant(2, types.Int), exprs.constant(3, types.Int));
 	
 	test.ok(exp);
 	test.equal(typeof exp, 'object');
