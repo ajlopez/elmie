@@ -246,6 +246,28 @@ exports['parse less strings'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
+exports['parse greater numbers'] = function (test) {
+	var parser = parsers.parser('3 > 2');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '3 > 2');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
+exports['parse greater strings'] = function (test) {
+	var parser = parsers.parser('"foo" > "bar"');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), '"foo" > "bar"');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
 exports['parse define expression'] = function (test) {
 	var parser = parsers.parser('answer = 42');
 	
