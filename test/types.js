@@ -114,9 +114,21 @@ exports['numeric predicate'] = function (test) {
 	test.strictEqual(types.numeric(types.Float), true);
 	test.strictEqual(types.numeric(types.Number), true);
 
+	test.strictEqual(types.numeric(types.String), false);
 	test.strictEqual(types.numeric(types.func(types.Int, types.Int)), false);
 	test.strictEqual(types.numeric(types.list(types.String)), false);
 	test.strictEqual(types.numeric(types.list(types.Bool)), false);
+}
+
+exports['comparable predicate'] = function (test) {
+	test.strictEqual(types.comparable(types.Int), true);
+	test.strictEqual(types.comparable(types.Float), true);
+	test.strictEqual(types.comparable(types.Number), true);
+	test.strictEqual(types.comparable(types.list(types.String)), true);
+	test.strictEqual(types.comparable(types.list(types.Bool)), true);
+
+	test.strictEqual(types.comparable(types.Bool), false);
+	test.strictEqual(types.comparable(types.func(types.Int, types.Int)), false);
 }
 
 exports['from string'] = function (test) {
