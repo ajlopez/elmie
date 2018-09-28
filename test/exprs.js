@@ -526,3 +526,63 @@ exports['less or equal with strings giving false'] = function (test) {
 	test.strictEqual(exp.type(), types.Boolean);
 	test.strictEqual(exp.compile(), '"foo" <= "bar"');
 }
+
+exports['greater or equal with numbers'] = function (test) {
+    var exp = exprs.greaterEqual(exprs.constant(3, types.Number), exprs.constant(2, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '3 >= 2');
+}
+
+exports['greater or equal with equal numbers'] = function (test) {
+    var exp = exprs.greaterEqual(exprs.constant(3, types.Number), exprs.constant(3, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '3 >= 3');
+}
+
+exports['greater or equal with numbers givin false'] = function (test) {
+    var exp = exprs.greaterEqual(exprs.constant(1, types.Number), exprs.constant(2, types.Number));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), false);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '1 >= 2');
+}
+
+exports['greater or equal with strings'] = function (test) {
+    var exp = exprs.greaterEqual(exprs.constant("foo", types.String), exprs.constant("bar", types.String));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '"foo" >= "bar"');
+}
+
+exports['greater or equal with equal strings'] = function (test) {
+    var exp = exprs.greaterEqual(exprs.constant("foo", types.String), exprs.constant("foo", types.String));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), true);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '"foo" >= "foo"');
+}
+
+exports['greater or equal with strings giving false'] = function (test) {
+    var exp = exprs.greaterEqual(exprs.constant("bar", types.String), exprs.constant("foo", types.String));
+	
+	test.ok(exp);
+	test.equal(typeof exp, 'object');
+	test.strictEqual(exp.evaluate(), false);
+	test.strictEqual(exp.type(), types.Boolean);
+	test.strictEqual(exp.compile(), '"bar" >= "foo"');
+}
