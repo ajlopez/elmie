@@ -586,3 +586,14 @@ exports['greater or equal with strings giving false'] = function (test) {
 	test.strictEqual(exp.type(), types.Boolean);
 	test.strictEqual(exp.compile(), '"bar" >= "foo"');
 }
+
+exports['or expression'] = function (test) {
+	var or = exprs.or(exprs.constant(true, types.Boolean), exprs.constant(false, types.Boolean));
+	
+	test.ok(or);
+	test.equal(typeof or, 'object');
+	test.strictEqual(or.evaluate(), true);
+	test.strictEqual(or.type(), types.Boolean);
+	test.strictEqual(or.compile(), 'true || false');
+}
+
