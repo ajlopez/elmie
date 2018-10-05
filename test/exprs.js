@@ -587,7 +587,7 @@ exports['greater or equal with strings giving false'] = function (test) {
 	test.strictEqual(exp.compile(), '"bar" >= "foo"');
 }
 
-exports['or expression'] = function (test) {
+exports['or expression with true false'] = function (test) {
 	var or = exprs.or(exprs.constant(true, types.Boolean), exprs.constant(false, types.Boolean));
 	
 	test.ok(or);
@@ -595,5 +595,35 @@ exports['or expression'] = function (test) {
 	test.strictEqual(or.evaluate(), true);
 	test.strictEqual(or.type(), types.Boolean);
 	test.strictEqual(or.compile(), 'true || false');
+}
+
+exports['or expression with true true'] = function (test) {
+	var or = exprs.or(exprs.constant(true, types.Boolean), exprs.constant(true, types.Boolean));
+	
+	test.ok(or);
+	test.equal(typeof or, 'object');
+	test.strictEqual(or.evaluate(), true);
+	test.strictEqual(or.type(), types.Boolean);
+	test.strictEqual(or.compile(), 'true || true');
+}
+
+exports['or expression with false true'] = function (test) {
+	var or = exprs.or(exprs.constant(false, types.Boolean), exprs.constant(true, types.Boolean));
+	
+	test.ok(or);
+	test.equal(typeof or, 'object');
+	test.strictEqual(or.evaluate(), true);
+	test.strictEqual(or.type(), types.Boolean);
+	test.strictEqual(or.compile(), 'false || true');
+}
+
+exports['or expression with false false'] = function (test) {
+	var or = exprs.or(exprs.constant(false, types.Boolean), exprs.constant(false, types.Boolean));
+	
+	test.ok(or);
+	test.equal(typeof or, 'object');
+	test.strictEqual(or.evaluate(), false);
+	test.strictEqual(or.type(), types.Boolean);
+	test.strictEqual(or.compile(), 'false || false');
 }
 
