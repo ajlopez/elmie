@@ -587,43 +587,19 @@ exports['greater or equal with strings giving false'] = function (test) {
 	test.strictEqual(exp.compile(), '"bar" >= "foo"');
 }
 
-exports['or expression with true false'] = function (test) {
-	var or = exprs.or(exprs.constant(true, types.Boolean), exprs.constant(false, types.Boolean));
+exports['or expression'] = function (test) {
+    testOr(false, false, false, 'false || false', test);
+    testOr(false, true, true, 'false || true', test);
+    testOr(true, false, true, 'true || false', test);
+    testOr(true, true, true, 'true || true', test);
+}
+
+function testOr(left, right, evaluated, compiled, test) {
+	var or = exprs.or(exprs.constant(left, types.Boolean), exprs.constant(right, types.Boolean));
 	
 	test.ok(or);
 	test.equal(typeof or, 'object');
-	test.strictEqual(or.evaluate(), true);
+	test.strictEqual(or.evaluate(), evaluated);
 	test.strictEqual(or.type(), types.Boolean);
-	test.strictEqual(or.compile(), 'true || false');
+	test.strictEqual(or.compile(), compiled);
 }
-
-exports['or expression with true true'] = function (test) {
-	var or = exprs.or(exprs.constant(true, types.Boolean), exprs.constant(true, types.Boolean));
-	
-	test.ok(or);
-	test.equal(typeof or, 'object');
-	test.strictEqual(or.evaluate(), true);
-	test.strictEqual(or.type(), types.Boolean);
-	test.strictEqual(or.compile(), 'true || true');
-}
-
-exports['or expression with false true'] = function (test) {
-	var or = exprs.or(exprs.constant(false, types.Boolean), exprs.constant(true, types.Boolean));
-	
-	test.ok(or);
-	test.equal(typeof or, 'object');
-	test.strictEqual(or.evaluate(), true);
-	test.strictEqual(or.type(), types.Boolean);
-	test.strictEqual(or.compile(), 'false || true');
-}
-
-exports['or expression with false false'] = function (test) {
-	var or = exprs.or(exprs.constant(false, types.Boolean), exprs.constant(false, types.Boolean));
-	
-	test.ok(or);
-	test.equal(typeof or, 'object');
-	test.strictEqual(or.evaluate(), false);
-	test.strictEqual(or.type(), types.Boolean);
-	test.strictEqual(or.compile(), 'false || false');
-}
-
