@@ -603,3 +603,21 @@ function testOr(left, right, evaluated, compiled, test) {
 	test.strictEqual(or.type(), types.Boolean);
 	test.strictEqual(or.compile(), compiled);
 }
+
+exports['and expression'] = function (test) {
+    testAnd(false, false, false, 'false && false', test);
+    testAnd(false, true, false, 'false && true', test);
+    testAnd(true, false, false, 'true && false', test);
+    testAnd(true, true, true, 'true && true', test);
+}
+
+function testAnd(left, right, evaluated, compiled, test) {
+	var and = exprs.and(exprs.constant(left, types.Boolean), exprs.constant(right, types.Boolean));
+	
+	test.ok(and);
+	test.equal(typeof and, 'object');
+	test.strictEqual(and.evaluate(), evaluated);
+	test.strictEqual(and.type(), types.Boolean);
+	test.strictEqual(and.compile(), compiled);
+}
+
