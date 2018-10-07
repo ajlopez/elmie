@@ -34,6 +34,11 @@ exports['parse string'] = function (test) {
 	test.equal(expr('"foo"'), '"foo"');
 }
 
+exports['parse boolean constants'] = function (test) {
+	test.equal(expr('True'), 'True');
+	test.equal(expr('False'), 'False');
+}
+
 exports['parse two integers'] = function (test) {
 	var parser = parsers.parser('42\n3');
 	
@@ -308,6 +313,17 @@ exports['parse greater or equal strings'] = function (test) {
 	
 	test.ok(expr);
 	test.equal(expr.compile(), '"foo" >= "bar"');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
+exports['parse or booleans'] = function (test) {
+	var parser = parsers.parser('false || true');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), 'false || true');
 	
 	test.equal(parser.parseExpression(), null);
 }

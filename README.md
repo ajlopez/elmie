@@ -43,6 +43,11 @@ TBD
 
 TBD
 
+## To Document
+
+- Check types in operators
+- Check precedences in operator
+
 ## Contribution
 
 Feel free to [file issues](https://github.com/ajlopez/elmie) and submit
