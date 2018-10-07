@@ -318,12 +318,23 @@ exports['parse greater or equal strings'] = function (test) {
 }
 
 exports['parse or booleans'] = function (test) {
-	var parser = parsers.parser('false || true');
+	var parser = parsers.parser('False || True');
 	
 	var expr = parser.parseExpression();
 	
 	test.ok(expr);
-	test.equal(expr.compile(), 'false || true');
+	test.equal(expr.compile(), 'False || True');
+	
+	test.equal(parser.parseExpression(), null);
+}
+
+exports['parse and booleans'] = function (test) {
+	var parser = parsers.parser('False && True');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.compile(), 'False && True');
 	
 	test.equal(parser.parseExpression(), null);
 }
