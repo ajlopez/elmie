@@ -12,3 +12,7 @@ exports['evaluate strings'] = function (test) {
 	test.strictEqual(elmie.evaluate('""'), '');
 }
 
+exports['evaluate booleans'] = function (test) {
+	test.strictEqual(elmie.evaluate('False'), false);
+	test.strictEqual(elmie.evaluate('True'), true);
+}

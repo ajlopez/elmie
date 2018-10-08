@@ -35,8 +35,8 @@ exports['parse string'] = function (test) {
 }
 
 exports['parse boolean constants'] = function (test) {
-	test.equal(expr('True'), 'True');
-	test.equal(expr('False'), 'False');
+	test.equal(expr('True'), 'true');
+	test.equal(expr('False'), 'false');
 }
 
 exports['parse two integers'] = function (test) {
@@ -323,7 +323,7 @@ exports['parse or booleans'] = function (test) {
 	var expr = parser.parseExpression();
 	
 	test.ok(expr);
-	test.equal(expr.compile(), 'False || True');
+	test.equal(expr.compile(), 'false || true');
 	
 	test.equal(parser.parseExpression(), null);
 }
@@ -334,7 +334,7 @@ exports['parse and booleans'] = function (test) {
 	var expr = parser.parseExpression();
 	
 	test.ok(expr);
-	test.equal(expr.compile(), 'False && True');
+	test.equal(expr.compile(), 'false && true');
 	
 	test.equal(parser.parseExpression(), null);
 }
