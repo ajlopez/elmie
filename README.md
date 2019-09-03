@@ -34,6 +34,7 @@ TBD
 - [Toward a Better Front End Architecture: Elm - Codemash 2017](https://www.youtube.com/watch?v=EDp6UmaA9CM)
 - [Functional Programming Course](https://github.com/data61/fp-course)
 - [A Farewell to FRP](http://elm-lang.org/blog/farewell-to-frp)
+- [Elm + Bekk](https://elm-lang.org/news/elm-and-bekk)
 
 ## Samples
 
